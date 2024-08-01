@@ -15,7 +15,5 @@ const jonas = {
     },
 }
 
-// console.log(jonas.firstName + " has " + jonas.friends.length + " friends and his best friend is " + jonas.friends[0] + ".");
-
 // Example, Jonas is a 46 year old teacher, and he has a driver's license.
 console.log(jonas.getSummary())
