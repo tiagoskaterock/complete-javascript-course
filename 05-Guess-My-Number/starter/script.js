@@ -12,7 +12,13 @@ document.querySelector('.guess').value = 35;
 
 const checkBtn = document.querySelector(".check");
 const guess = document.querySelector(".guess");
+const message = document.querySelector(".message");
 
 checkBtn.addEventListener("click", function() {
-    alert(guess.value);
+    if( ! guess.value) {
+        message.textContent = "No guess";
+    }
+    else {
+        message.textContent = "Your guess is " + guess.value;
+    }
 });
