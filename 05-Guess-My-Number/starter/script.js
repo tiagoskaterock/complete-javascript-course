@@ -1,18 +1,15 @@
 'use strict';
 
-/*
-document.querySelector(".message").textContent = "Correct Number";
-
-document.querySelector('.number').textContent = '69';
-
-document.querySelector(".score").textContent = 11;
-
-document.querySelector('.guess').value = 35;
-*/
-
 const checkBtn = document.querySelector(".check");
 const guess = document.querySelector(".guess");
 const message = document.querySelector(".message");
+const maxNumber = 10;
+const numberToGuess = generateNumber();
+const number = document.querySelector(".number");
+
+function generateNumber() {
+    return Math.trunc(Math.random() * maxNumber + 1);
+}
 
 checkBtn.addEventListener("click", function() {
     if( ! guess.value) {
@@ -22,3 +19,5 @@ checkBtn.addEventListener("click", function() {
         message.textContent = "Your guess is " + guess.value;
     }
 });
+
+number.textContent = numberToGuess;
