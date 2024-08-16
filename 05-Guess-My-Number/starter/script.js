@@ -3,7 +3,7 @@
 const checkBtn = document.querySelector(".check");
 const guess = document.querySelector(".guess");
 const message = document.querySelector(".message");
-const maxNumber = 10;
+const maxNumber = 5;
 const numberToGuess = generateNumber();
 const number = document.querySelector(".number");
 const score = document.querySelector(".score");
@@ -32,6 +32,7 @@ function losePoint() {
 }
 
 function gameOver(){
+    show_number_to_guess();
     scoreValue = 0;
     updatePointsOnScreen();
     message.textContent = "GAME OVER";
@@ -41,13 +42,25 @@ function generateNumber() {
     return Math.trunc(Math.random() * maxNumber + 1);
 }
 
+function backGroundVictory() {
+    document.body.style.backgroundColor = "green";
+}
+
+function win() {
+    show_number_to_guess();
+    backGroundVictory();
+    number.style.fontWeight = "bold";
+    number.style.width = "30rem";
+    message.textContent = "You guessed it!";
+    checkBtn.computedStyleMap.display = "none";
+}
+
 checkBtn.addEventListener("click", function() {
     if( ! guess.value) {
         message.textContent = "No guess";
     }
     else if(parseInt(guess.value) == numberToGuess) {
-        message.textContent = "You guessed it!";
-        checkBtn.computedStyleMap.display = "none";
+        win();
     }
     else if(parseInt(guess.value) > numberToGuess){
         message.textContent = "Your guess is to high";
@@ -59,3 +72,7 @@ checkBtn.addEventListener("click", function() {
     }
     
 });
+
+function show_number_to_guess() {
+    number.textContent = numberToGuess;
+}
