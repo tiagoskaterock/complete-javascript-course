@@ -4,12 +4,13 @@ const checkBtn = document.querySelector(".check");
 const guess = document.querySelector(".guess");
 const message = document.querySelector(".message");
 const maxNumber = 5;
-const numberToGuess = generateNumber();
+var numberToGuess = generateNumber();
 const number = document.querySelector(".number");
 const score = document.querySelector(".score");
 const pointsLoseForMistake = 1;
 const startingPoints = 3;
 var scoreValue = startingPoints;
+const againBtn = document.querySelector('.again');
 
 updatePointsOnScreen();
 setMaxGuess();
@@ -53,6 +54,23 @@ function win() {
     number.style.width = "30rem";
     message.textContent = "You guessed it!";
     checkBtn.computedStyleMap.display = "none";
+}
+
+againBtn.addEventListener("click", function() {
+    restart()
+})
+
+function restart() {
+    numberToGuess = generateNumber();
+    scoreValue = startingPoints
+    score.textContent = scoreValue    
+    document.body.style.backgroundColor = "#222";
+    message.textContent = "Start guessing...";
+    number.textContent = "?";
+    number.style.size = "6rem";
+    number.style.width = '15rem';   
+    number.style.fontWeight = 'normal';
+    guess.value = "";
 }
 
 checkBtn.addEventListener("click", function() {
