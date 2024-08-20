@@ -11,9 +11,12 @@ const pointsLoseForMistake = 1;
 const startingPoints = 3;
 var scoreValue = startingPoints;
 const againBtn = document.querySelector('.again');
+const maxNumberElement = document.querySelector('.max-number')
 
-updatePointsOnScreen();
-setMaxGuess();
+function updateMaxNumberOnScreen() {
+    maxNumberElement.innerHTML = maxNumber
+}
+
 
 function updatePointsOnScreen(){
     score.textContent = scoreValue;
@@ -23,7 +26,8 @@ function setMaxGuess() {
     guess.attributes.max.value = maxNumber;
 }
 
-function losePoint() {    
+function losePoint() {  
+    errorSFX();  
     guess.value = "";
     scoreValue -= pointsLoseForMistake;
     updatePointsOnScreen();
@@ -54,10 +58,12 @@ function win() {
     number.style.width = "30rem";
     message.textContent = "You guessed it!";
     checkBtn.computedStyleMap.display = "none";
+    document.querySelector("#bg-song").pause();
+    document.querySelector("#victory-song").play();
 }
 
 againBtn.addEventListener("click", function() {
-    restart()
+    restart();
 })
 
 function restart() {
@@ -70,7 +76,9 @@ function restart() {
     number.style.size = "6rem";
     number.style.width = '15rem';   
     number.style.fontWeight = 'normal';
-    guess.value = "";
+    guess.value = "";    
+    document.querySelector("#bg-song").currentTime = 0;
+    document.querySelector("#bg-song").play();
 }
 
 checkBtn.addEventListener("click", function() {
@@ -94,3 +102,16 @@ checkBtn.addEventListener("click", function() {
 function show_number_to_guess() {
     number.textContent = numberToGuess;
 }
+
+function successSFX() {
+    document.querySelector("#success-sfx").play();    
+}
+
+function errorSFX() {
+    document.querySelector("#error-sfx").play();
+}
+
+document.querySelector("#bg-song").play();
+updatePointsOnScreen();
+setMaxGuess();
+updateMaxNumberOnScreen();
