@@ -3,15 +3,17 @@
 const checkBtn = document.querySelector(".check");
 const guess = document.querySelector(".guess");
 const message = document.querySelector(".message");
-const maxNumber = 5;
+const maxNumber = 100;
 var numberToGuess = generateNumber();
 const number = document.querySelector(".number");
 const score = document.querySelector(".score");
 const pointsLoseForMistake = 1;
-const startingPoints = 3;
+const startingPoints = 20;
 var scoreValue = startingPoints;
 const againBtn = document.querySelector('.again');
 const maxNumberElement = document.querySelector('.max-number')
+const highScoreElement = document.querySelector('.highscore')
+var highScore = 0
 
 function updateMaxNumberOnScreen() {
     maxNumberElement.innerHTML = maxNumber
@@ -59,7 +61,11 @@ function win() {
     message.textContent = "You guessed it!";
     checkBtn.computedStyleMap.display = "none";
     document.querySelector("#bg-song").pause();
-    document.querySelector("#victory-song").play();
+    document.querySelector("#success-sfx").play();
+    if(scoreValue > highScore) {
+        highScore = scoreValue;
+        highScoreElement.textContent = highScore;
+    }    
 }
 
 againBtn.addEventListener("click", function() {
@@ -78,7 +84,7 @@ function restart() {
     number.style.fontWeight = 'normal';
     guess.value = "";    
     document.querySelector("#bg-song").currentTime = 0;
-    document.querySelector("#bg-song").play();
+    // document.querySelector("#bg-song").play();
 }
 
 checkBtn.addEventListener("click", function() {
@@ -111,7 +117,7 @@ function errorSFX() {
     document.querySelector("#error-sfx").play();
 }
 
-document.querySelector("#bg-song").play();
+// document.querySelector("#bg-song").play();
 updatePointsOnScreen();
 setMaxGuess();
 updateMaxNumberOnScreen();
