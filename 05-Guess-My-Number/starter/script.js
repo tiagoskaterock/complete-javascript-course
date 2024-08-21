@@ -62,29 +62,40 @@ function win() {
     checkBtn.computedStyleMap.display = "none";
     document.querySelector("#bg-song").pause();
     document.querySelector("#success-sfx").play();
+    updateHighScore(); 
+}
+
+function updateHighScore() {
     if(scoreValue > highScore) {
         highScore = scoreValue;
         highScoreElement.textContent = highScore;
-    }    
+    } 
 }
 
 againBtn.addEventListener("click", function() {
-    restart();
+    restartGame();
 })
 
-function restart() {
+function restartGame() {
     numberToGuess = generateNumber();
-    scoreValue = startingPoints
-    score.textContent = scoreValue    
+    resetScore();
     document.body.style.backgroundColor = "#222";
     message.textContent = "Start guessing...";
     number.textContent = "?";
     number.style.size = "6rem";
     number.style.width = '15rem';   
     number.style.fontWeight = 'normal';
-    guess.value = "";    
+    guess.value = "";        
+}
+
+function resetScore() {
+    scoreValue = startingPoints
+    score.textContent = scoreValue 
+}
+
+function restartSong() {
     document.querySelector("#bg-song").currentTime = 0;
-    // document.querySelector("#bg-song").play();
+    startSong();
 }
 
 checkBtn.addEventListener("click", function() {
@@ -117,7 +128,11 @@ function errorSFX() {
     document.querySelector("#error-sfx").play();
 }
 
-// document.querySelector("#bg-song").play();
+function startSong() {    
+    document.querySelector("#bg-song").play();
+}
+
+startSong();
 updatePointsOnScreen();
 setMaxGuess();
 updateMaxNumberOnScreen();
