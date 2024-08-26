@@ -7,27 +7,25 @@ const closeModalElement = document.querySelector('.close-modal');
 
 for (let index = 0; index < showModalElements.length; index++) {
     console.log(showModalElements[index].textContent);
-    showModalElements[index].addEventListener('click', function() {
-        showModal();
-        showOverlay();
-    })
+    showModalElements[index].addEventListener('click', showModal)
 }
 
-closeModalElement.addEventListener('click', function() {
-    hideModal();
-    hideOverlay();
-});
+closeModalElement.addEventListener('click', hideModal);
+
+overlayElement.addEventListener('click', hideModal);
 
 function showModal() {
     modalElement.classList.remove('hidden');
-}
-
-function showOverlay() {
-    overlayElement.classList.remove('hidden');
+    showOverlay();
 }
 
 function hideModal() {
     modalElement.classList.add('hidden');
+    hideOverlay();
+}
+
+function showOverlay() {
+    overlayElement.classList.remove('hidden');
 }
 
 function hideOverlay() {
