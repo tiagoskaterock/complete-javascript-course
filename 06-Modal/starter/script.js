@@ -31,3 +31,9 @@ function showOverlay() {
 function hideOverlay() {
     overlayElement.classList.add('hidden');
 }
+
+document.addEventListener('keydown', function(event) {
+    if(event.key == 'Escape' && ! modalElement.classList.contains('hidden')) {
+        hideModal();
+    }    
+});
